@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Spring Boot Admin
+    name: spring-boot-admin
 
 eureka:
   instance:
