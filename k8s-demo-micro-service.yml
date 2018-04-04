@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: demo-micro-service
+  labels:
+    app: spring-boot-admin
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: spring-boot-admin
+        component: demo-micro-service
+    spec:
+      containers:
+        - image: gcr.io/cso-ynovytskyy/demo-micro-service
+          name: demo-micro-service
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EUREKA_SERVICE_URL
+              value: "http://eureka:8761"
+            - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
+              value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-micro-service
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: spring-boot-admin
+    component: demo-micro-service
+  type: LoadBalancer
