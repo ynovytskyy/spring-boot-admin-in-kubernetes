@@ -2,6 +2,9 @@ spring:
   application:
     name: demo-micro-service
 
+logging:
+  file: application.log
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
@@ -9,6 +12,10 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+
+endpoints:
+  shutdown:
+    enabled: true
 
 management:
   endpoints:
